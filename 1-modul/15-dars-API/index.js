@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 const server = http.createServer((req, res) => {
+    console.log("method: ", req.method, " URL: ", req.url);
     if (req.method === "GET") {
         res.writeHead(200, { 'Content-type': 'text/html' })
         if (req.url === '/') {
@@ -23,6 +24,10 @@ const server = http.createServer((req, res) => {
                 res.end(conten)
             })
 
+        } else if (req.url === '/api/admin') {
+            res.writeHead(200, { 'Content-type': 'text/json' })
+            const admin = { name: "Abdulbosit", surname: "Tuychiev", job: "Fullstack developer" }
+            res.end(JSON.stringify(admin))
         }
     } else if (req.method === "POST") {
         const name = []
