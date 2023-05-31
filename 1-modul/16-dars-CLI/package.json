@@ -1,0 +1,19 @@
+{
+    "name": "5-dars-nodepackagemanagernpm",
+    "version": "1.0.0",
+    "description": "nodejs_packages",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "Abdulbosit",
+    "license": "ISC",
+    "dependencies": {
+        "bootstrap": "^5.2.3",
+        "jquery": "^3.7.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.22"
+    }
+}
