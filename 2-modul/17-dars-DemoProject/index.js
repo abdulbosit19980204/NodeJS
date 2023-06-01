@@ -1,0 +1,1 @@
+// Bu darsda demo project haqida ma'lumot berib o'tilgan
