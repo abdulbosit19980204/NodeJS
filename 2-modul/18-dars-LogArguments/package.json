@@ -1,0 +1,16 @@
+{
+    "name": "weather_cli",
+    "version": "1.0.0",
+    "description": "weather cli by course",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+
+    },
+    "author": "Abdulbosit Tuychiev",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.22"
+    }
+}
