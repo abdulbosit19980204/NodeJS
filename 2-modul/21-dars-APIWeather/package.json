@@ -1,0 +1,21 @@
+{
+    "name": "weather_cli",
+    "version": "1.0.0",
+    "description": "weather cli by course",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "Abdulbosit Tuychiev",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.22"
+    },
+    "dependencies": {
+        "chalk": "^5.2.0",
+        "dedent": "^0.7.0",
+        "dedent-js": "^1.0.1"
+    }
+}
