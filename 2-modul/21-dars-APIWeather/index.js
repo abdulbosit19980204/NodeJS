@@ -3,6 +3,10 @@ import { printError, printSuccess, printHelp } from './services/log.service.js'
 import { saveKeyValue } from './services/storage.service.js'
 
 const saveToken = async(token) => {
+    if (!token.length) {
+        printError("Token doesn't exsist")
+        return
+    }
     try {
         await saveKeyValue('token', token)
         printSuccess('Token was saved')
@@ -24,7 +28,7 @@ const startCLI = () => {
     }
     if (args.t) {
         // save token
-        saveKeyValue('token', args.t)
+        return saveKeyValue('token', args.t)
     }
     //result
 }
