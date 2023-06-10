@@ -16,10 +16,24 @@ const saveToken = async(token) => {
     }
 }
 
+const getForcast = async() => {
+    try {
+        const response = await getWeather(process.env.CITY ?? 'Uzbekistan')
+        console.log(response);
+    } catch (error) {
+        if (error ? .response ? .status == 404) {
+            printError("City not found")
+        } else if (error ? response ? .status == 402) {
+            printError("Invalid token")
+        }
+    }
+
+}
+
 const startCLI = () => {
     const args = getArgs(process.argv)
     console.log("args:", args);
-    console.log("env:", process.env);
+    // console.log("env:", process.env);
 
     if (args.h) {
         //help
@@ -33,7 +47,7 @@ const startCLI = () => {
         return saveKeyValue(args.t)
 
     }
-    getWeather(process.env.CITY ?? 'Uzbekistan')
+    getForcast()
         //result
 }
 
