@@ -28,11 +28,22 @@ app.use(express.json())
 app.use(AuthRoutes)
 app.use(ProductsRoutes)
 
-// console.log(process.env.MONGO_URI);
-const PORT = process.env.PORT || 4100
 
-mongoose.set('strictQuery', false)
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true
-})
-app.listen(PORT, () => { console.log(`Server is running on port:  ${ PORT }`) })
+const startApp = () => {
+    try {
+        mongoose.set('strictQuery', false)
+        mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true
+        })
+        console.log("MongoDB connected");
+
+        // console.log(process.env.MONGO_URI);
+        const PORT = process.env.PORT || 4100
+        app.listen(PORT, () => { console.log(`Server is running on port:  ${ PORT }`) })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+startApp()
