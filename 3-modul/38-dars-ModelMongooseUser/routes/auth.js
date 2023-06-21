@@ -22,13 +22,14 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', async(req, res) => {
-    // console.log("Req Body", req.body);
+
     const userData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
     }
+
     const user = await User.create(userData)
     console.log(user);
     res.redirect('/')
