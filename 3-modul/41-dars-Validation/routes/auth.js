@@ -6,6 +6,7 @@ router.get('/login', (req, res) => {
     res.render('login', {
         title: 'Login | Boom Shop',
         isLogin: true,
+        loginError: "Error",
     })
 })
 
@@ -13,6 +14,7 @@ router.get('/register', (req, res) => {
     res.render('register', {
         title: 'Register | Boom Shop',
         isRegister: true,
+        registerError: "Error",
     })
 })
 
