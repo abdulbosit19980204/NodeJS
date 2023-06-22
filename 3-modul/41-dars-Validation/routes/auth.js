@@ -6,7 +6,7 @@ router.get('/login', (req, res) => {
     res.render('login', {
         title: 'Login | Boom Shop',
         isLogin: true,
-        loginError: "Error",
+        loginError: req.flash("loginError"),
     })
 })
 
@@ -14,31 +14,55 @@ router.get('/register', (req, res) => {
     res.render('register', {
         title: 'Register | Boom Shop',
         isRegister: true,
-        registerError: "Error",
+        registerError: req.flash("registerError"),
     })
 })
 
 router.post('/login', async(req, res) => {
-    const existUser = await User.findOne({ email: req.body.email })
-    if (!existUser) {
-        console.log("User not found");
-        return false
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        req.flash("loginError", "All fields is required")
+        res.redirect('/login')
+        return
     }
-    const isPassEqual = await bcrypt.compare(req.body.password, existUser.password)
+
+    const existUser = await User.findOne({ email })
+    if (!existUser) {
+        req.flash("loginError", "User not found")
+        res.redirect('/login')
+        return
+    }
+    const isPassEqual = await bcrypt.compare(password, existUser.password)
     if (!isPassEqual) {
-        console.log("Password wrong");
-        return false
+        req.flash("loginError", "Password is wrong")
+        res.redirect('/login')
+        return
     }
     console.log(existUser);
     res.redirect('/')
 })
 
 router.post('/register', async(req, res) => {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const { firstName, lastName, email, password } = req.body
+    if (!firstName || !lastName || !email || !password) {
+        req.flash("registerError", "All fields is required")
+        res.redirect('/register')
+        return
+    }
+
+    const candidate = await User.findOne({ email })
+    if (candidate) {
+        req.flash("registerError", "User already exist")
+        res.redirect('/register')
+        return
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
     const userData = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
         password: hashedPassword,
     }
 
