@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     })
 
 })
+
 router.get('/products', (req, res) => {
     res.render('products', {
         title: 'Products | Boom Shop',
@@ -16,11 +17,17 @@ router.get('/products', (req, res) => {
 
     })
 })
+
 router.get('/add', (req, res) => {
     res.render('add', {
         title: 'Add new item',
         isAdd: true,
     })
+})
+
+router.post('/add-products', (req, res) => {
+    console.log(req.body);
+    res.redirect('/')
 })
 
 export default router
