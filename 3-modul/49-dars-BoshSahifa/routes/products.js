@@ -5,10 +5,13 @@ import Product from "../models/Product.js";
 
 const router = Router()
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
+    const products = await Product.find().lean()
+
+
     res.render('index', {
         title: 'Boom shop | Course',
-
+        products: products
     })
 
 })
