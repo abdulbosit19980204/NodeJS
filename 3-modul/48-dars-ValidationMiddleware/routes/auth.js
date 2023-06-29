@@ -2,12 +2,10 @@ import { Router } from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt"
 import { generateJWTToken } from "../services/tooken.js";
+import loginMiddleware from "../middleware/login.js";
 const router = Router()
-router.get('/login', (req, res) => {
-    if (req.cookies.token) {
-        res.redirect('/')
-        return
-    }
+router.get('/login', loginMiddleware, (req, res) => {
+
     res.render('login', {
         title: 'Login | Boom Shop',
         isLogin: true,
@@ -15,11 +13,8 @@ router.get('/login', (req, res) => {
     })
 })
 
-router.get('/register', (req, res) => {
-    if (req.cookies.token) {
-        res.redirect('/')
-        return
-    }
+router.get('/register', loginMiddleware, (req, res) => {
+
     res.render('register', {
         title: 'Register | Boom Shop',
         isRegister: true,
