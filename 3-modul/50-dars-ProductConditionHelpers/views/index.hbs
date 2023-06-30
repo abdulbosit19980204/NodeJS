@@ -1,5 +1,4 @@
 {{#if products.length}}
-{{userID}}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {{#each products}}
         <div class="col">
@@ -10,13 +9,18 @@
               <div class="d-flex justify-content-end align-items-center">
                  <small class="text-body-secondary fw-semibold fs-5">{{price}}.00$</small>
               </div>
-              {{user}}
-          </div>
+            </div>
+
             <div class="card-footer">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+
                 <button type="button" class="btn btn-outline-primary">Details</button>
+                {{#if @root.token}}
+                {{#ifequal @root.userID user}}
                 <button type="button" class="btn btn-outline-secondary">Edit</button>
                 <button type="button" class="btn btn-outline-danger">Delete</button>
+                {{/ifequal}}
+                {{/if}}
                 </div>
             </div>
           </div>

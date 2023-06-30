@@ -16,12 +16,14 @@ dotenv.config()
 import AuthRoutes from "./routes/auth.js"
 import ProductsRoutes from "./routes/products.js"
 
-
+//Utils
+import hbsHelper from "./utils/index.js"
 const app = express()
 
 const hbs = create({
     defaultLayout: 'main',
     extname: 'hbs',
+    helpers: hbsHelper,
 })
 
 app.engine('hbs', hbs.engine)
