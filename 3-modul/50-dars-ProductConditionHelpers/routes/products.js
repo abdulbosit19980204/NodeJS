@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
 
     res.render('index', {
         title: 'Boom shop | Course',
-        products: products
+        products: products.reverse()
     })
 
 })
