@@ -3,8 +3,11 @@ import { create } from "express-handlebars"
 import mongoose from "mongoose"
 import flash from "connect-flash"
 import session from "express-session"
-import varMiddleware from "./middleware/var.js"
 import cookieParser from "cookie-parser"
+
+//Middlewares
+import varMiddleware from "./middleware/var.js"
+import userMiddleware from "./middleware/user.js"
 //DOTENV
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -29,8 +32,8 @@ app.use(express.static('public'))
 app.use(express.json())
 app.use(cookieParser())
 app.use(varMiddleware)
-
-// //validation 
+app.use(userMiddleware)
+    // //validation 
 app.use(session({ secret: "Abdulbosit", resave: false, saveUninitialized: false, }));
 app.use(flash())
 

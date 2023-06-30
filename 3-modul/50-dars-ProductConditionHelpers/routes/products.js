@@ -7,11 +7,12 @@ const router = Router()
 
 router.get('/', async(req, res) => {
     const products = await Product.find().lean()
-
+    console.log(products);
 
     res.render('index', {
         title: 'Boom shop | Course',
-        products: products.reverse()
+        products: products.reverse(),
+        UserID: req.UserID ? req.userID.toString() : null,
     })
 
 })
