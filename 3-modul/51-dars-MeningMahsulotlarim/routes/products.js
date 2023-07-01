@@ -7,7 +7,7 @@ const router = Router()
 
 router.get('/', async(req, res) => {
     const products = await Product.find().lean()
-    console.log(req.userID);
+
 
     res.render('index', {
         title: 'Boom shop | Course',
@@ -17,11 +17,15 @@ router.get('/', async(req, res) => {
 
 })
 
-router.get('/products', (req, res) => {
+router.get('/products', async(req, res) => {
+    const user = req.userID ? req.userID.toString() : null
+    const myProducts = await Product.find({ user }).populate("user").lean()
+
+
     res.render('products', {
         title: 'Products | Boom Shop',
         isProducts: true,
-
+        myProducts: myProducts,
     })
 })
 

@@ -4,5 +4,8 @@ export default {
             return options.fn(this)
         }
         return options.inverse(this)
+    },
+    getFullNameFirstCharacter(firstname, lastname) {
+        return firstname.charAt(0) + lastname.charAt(0)
     }
 }
