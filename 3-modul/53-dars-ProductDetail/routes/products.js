@@ -38,6 +38,17 @@ router.get('/add', authMiddleware, (req, res) => {
     })
 })
 
+
+router.get('/product/:id', async(req, res) => {
+    const id = req.params.id
+    const product = await Product.findById(id).populate("user").lean()
+    res.render('product', {
+        product: product,
+    })
+
+})
+
+
 router.post('/add-products', userMiddleware, async(req, res) => {
     const { title, description, image, price } = req.body
     if (!title || !description || !image || !price) {

@@ -15,7 +15,7 @@
             <div class="card-footer">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                <button type="button" class="btn btn-outline-primary">Details</button>
+                <a href="/product/{{_id}}" type="button" class="btn btn-outline-primary">Details</a>
                 {{#if @root.token}}
                 {{#ifequal @root.userID user}}
                 <button type="button" class="btn btn-outline-secondary">Edit</button>
