@@ -26,3 +26,14 @@
     background-position: center;
     background-size: cover;
 }
+
+.delete-btn {
+    border: none;
+    margin: none;
+    background-color: transparent;
+    color: red;
+}
+
+.delete-btn:hover {
+    color: #fff;
+}
