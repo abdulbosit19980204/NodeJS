@@ -90,7 +90,7 @@ router.post('/edit-product/:id', async(req, res) => {
         return
     }
     await Product.findByIdAndUpdate(id, req.body, { new: true })
-    res.redirect('/products')
+    res.redirect('/')
 
 })
 export default router
