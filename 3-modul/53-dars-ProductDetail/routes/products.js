@@ -38,6 +38,19 @@ router.get('/add', authMiddleware, (req, res) => {
     })
 })
 
+router.get('/product/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const product = await Product.findById(id).populate('user').lean();
+
+        res.render('product', { product: product });
+    } catch (error) {
+        // Handle the error
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 router.post('/add-products', userMiddleware, async(req, res) => {
     const { title, description, image, price } = req.body
     if (!title || !description || !image || !price) {
