@@ -43,13 +43,30 @@ router.get('/product/:id', async(req, res) => {
         const id = req.params.id;
         const product = await Product.findById(id).populate('user').lean();
 
-        res.render('product', { product: product });
+        res.render('product', {
+            product: product,
+            errorEditProduct: req.flash('errorEditProduct')
+        });
     } catch (error) {
         // Handle the error
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 });
+
+router.get('/edit-product/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const product = await Product.findById(id).populate('user').lean();
+
+        res.render('edit-product', { product: product });
+    } catch (error) {
+        // Handle the error
+        console.error(error);
+        // res.status(500).send('Internal Server Error');
+        res.send(error.message)
+    }
+})
 
 router.post('/add-products', userMiddleware, async(req, res) => {
     const { title, description, image, price } = req.body
@@ -63,4 +80,17 @@ router.post('/add-products', userMiddleware, async(req, res) => {
     res.redirect('/')
 })
 
+router.post('/edit-product/:id', async(req, res) => {
+    const { title, description, image, price } = req.body
+    const id = req.params.id
+    console.log(id);
+    if (!title || !description || !image || !price) {
+        req.flash("errorEditProduct", "All fields is required")
+        res.redirect(`/edit-product/${{id}}`)
+        return
+    }
+    await Product.findByIdAndUpdate(id, req.body, { new: true })
+    res.redirect('/products')
+
+})
 export default router
