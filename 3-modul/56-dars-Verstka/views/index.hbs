@@ -31,7 +31,19 @@
         {{/each}}
 </div>
 {{else}}
-<p>No products</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>No product found! </strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+      <img class="" src="https://test.techhut.com.bd/images/no-item-in-cart.gif" alt="" srcset="">
+      {{!-- <img class="" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2NlaHRsZnZlZmw2eW8wZDl1dG1jbjFydWo5YzFxcHJrenJ3NjVvbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cLwJ6zsRKyAc2Swzgu/giphy.gif" alt="" srcset=""> --}}
+         
+    </div>
+  </div>
+</div>
 {{/if}}
 
 

@@ -55,16 +55,16 @@ router.get('/product/:id', async(req, res) => {
 });
 
 router.get('/edit-product/:id', async(req, res) => {
+    const id = req.params.id;
     try {
-        const id = req.params.id;
-        const product = await Product.findById(id).populate('user').lean();
-
+        const product = await Product.findById({ _id: id }).populate('user').lean();
         res.render('edit-product', { product: product });
     } catch (error) {
         // Handle the error
-        console.error(error);
-        // res.status(500).send('Internal Server Error');
-        res.send(error.message)
+        console.error(error.message);
+        res.status(500).send('Internal Server Error');
+
+
     }
 })
 
@@ -86,9 +86,12 @@ router.post('/edit-product/:id', async(req, res) => {
     console.log(id);
     if (!title || !description || !image || !price) {
         req.flash("errorEditProduct", "All fields is required")
-        res.redirect(`/edit-product/${{id}}`)
+        let path = "/edit-product/" + id
+        res.redirect(path)
         return
     }
+
+    console.log("=============================");
     await Product.findByIdAndUpdate(id, req.body, { new: true })
     res.redirect('/')
 

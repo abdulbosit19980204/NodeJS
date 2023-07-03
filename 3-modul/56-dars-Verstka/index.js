@@ -5,6 +5,8 @@ import flash from "connect-flash"
 import session from "express-session"
 import cookieParser from "cookie-parser"
 
+
+
 //Middlewares
 import varMiddleware from "./middleware/var.js"
 import userMiddleware from "./middleware/user.js"
